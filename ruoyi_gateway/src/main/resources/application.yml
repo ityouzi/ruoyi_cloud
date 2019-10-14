@@ -1,0 +1,55 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: ruoyi_gateway
+  devtools:
+    restart:
+      enabled: true
+  profiles:
+    active: dev
+  cloud:
+    config:
+      fail-fast: true
+      name: ${spring.application.name}
+      profile: ${spring.profiles.active}
+      discovery:
+        enabled: true
+        service-id: ruoyi_config
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        #认证中心
+        - id: ruoyi_auth
+          uri: lb://ruoyi_auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            #验证码处理
+            - CacheRequest
+            - ImgCodeFilter
+            - StripPrefix=1
+          #代码生成
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/
+      #defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true #访问路径可以显示IP地址
+
+
+hystrix:
+  command:
+    default:  #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          enable: true
+        isolaion:
+          thread:
+            timeoutInMilliseconds: 5000 #断路器超时时间，默认1000ms
