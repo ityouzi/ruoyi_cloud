@@ -6,15 +6,23 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ruoyi_auth" />
         <module name="ruoyi_common_auth" />
         <module name="ruoyi_common_core" />
         <module name="ruoyi_common_log" />
         <module name="ruoyi_common_redis" />
         <module name="ruoyi_common_swagger" />
         <module name="ruoyi_config" />
+        <module name="ruoyi_dfs" />
         <module name="ruoyi_eureka" />
         <module name="ruoyi_gateway" />
+        <module name="ruoyi_system" />
+        <module name="ruoyi_system_api" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ruoyiauth" target="1.8" />
+      <module name="ruoyiservice" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

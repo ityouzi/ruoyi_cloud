@@ -40,6 +40,11 @@
         </dependency>
 
         <!--common 模块-->
+        <dependency>
+            <groupId>com.tiyouzi</groupId>
+            <artifactId>ruoyi_common_core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
 
         <dependency>

@@ -11,5 +11,13 @@
 
     <artifactId>ruoyi_common_auth</artifactId>
 
+    <dependencies>
+        <!--系统业务api模块-->
+        <dependency>
+            <groupId>com.tiyouzi</groupId>
+            <artifactId>ruoyi_service_api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

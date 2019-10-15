@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>ruoyi_service_api</artifactId>
+        <groupId>com.tiyouzi</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>ruoyi_system_api</artifactId>
+
+
+    <!--通用工具 -->
+    <dependencies>
+        <dependency>
+            <groupId>com.tiyouzi</groupId>
+            <artifactId>ruoyi_common_core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!--swagger 模块-->
+        <dependency>
+            <groupId>com.tiyouzi</groupId>
+            <artifactId>ruoyi_common_swagger</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+</project>

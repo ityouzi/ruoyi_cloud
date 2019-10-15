@@ -13,6 +13,8 @@
         <module>ruoyi_config</module>
         <module>ruoyi_gateway</module>
         <module>ruoyi_common</module>
+        <module>ruoyi_service</module>
+        <module>ruoyi_service_api</module>
     </modules>
 
 
