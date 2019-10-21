@@ -8,9 +8,9 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <!--代码生成-->
+    <artifactId>ruoyi_generate</artifactId>
 
-    <!--系统业务-->
-    <artifactId>ruoyi_system</artifactId>
 
     <dependencies>
         <!--配置中心客户端-->
@@ -25,25 +25,12 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
             <version>2.1.2.RELEASE</version>
         </dependency>
-        <!--熔断器-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-            <version>2.0.2.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-            <version>2.0.2.RELEASE</version>
-        </dependency>
-
-
-        <!--web模块-->
+        <!--Web 模块-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <exclusions>
-                <!--排除tomcat依赖 -->
+                <!--排除tomcat依赖-->
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -51,28 +38,26 @@
             </exclusions>
         </dependency>
 
-
-        <!--undertow容器-->
+        <!--undertow 容器-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
-        <!--阿里数据连接池-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-        </dependency>
+
+        <!--mysql 驱动-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
-        <!--系统api模块-->
+        <!--kt.mybatis-->
         <dependency>
-            <groupId>com.tiyouzi</groupId>
-            <artifactId>ruoyi_system_api</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
         </dependency>
+
+        <!--日志模块-->
+
 
         <!--权限模块-->
         <dependency>
@@ -81,29 +66,16 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-        <!--redis 模块-->
         <dependency>
             <groupId>com.tiyouzi</groupId>
-            <artifactId>ruoyi_common_redis</artifactId>
+            <artifactId>ruoyi_common_core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-        <!--获取系统信息-->
+        <!--velocity代码生成使用模版-->
         <dependency>
-            <groupId>com.github.oshi</groupId>
-            <artifactId>oshi-core</artifactId>
-        </dependency>
-
-        <!--读取spring配置-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional> <!-- 表示依赖不会传递 -->
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
         </dependency>
 
         <dependency>
@@ -111,24 +83,11 @@
             <artifactId>fastjson</artifactId>
         </dependency>
 
-        <!--oss-->
+        <!--热部署-->
         <dependency>
-            <groupId>com.qiniu</groupId>
-            <artifactId>qiniu-java-sdk</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.aliyun.oss</groupId>
-            <artifactId>aliyun-sdk-oss</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.qcloud</groupId>
-            <artifactId>cos_api</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-log4j12</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional> <!-- 表示依赖不会传递 -->
         </dependency>
 
     </dependencies>
@@ -139,7 +98,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <fork>true</fork><!-- 如果没有该配置，devtools不会生效 -->
+                    <fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
                 </configuration>
                 <executions>
                     <execution>
@@ -151,9 +110,6 @@
             </plugin>
         </plugins>
     </build>
-
-
-
 
 
 </project>

@@ -15,6 +15,7 @@
         <module>ruoyi_system</module>
         <module>ruoyi_auth</module>
         <module>ruoyi_dfs</module>
+        <module>ruoyi_generate</module>
     </modules>
 
 

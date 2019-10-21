@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ityouzi.mapper.SysMenuMapper">
+    <resultMap id="SysMenuResult" type="com.ityouzi.system.domain.SysMenu">
+        <id property="menuId" column="menu_id" />
+        <result property="menuName" column="menu_name" />
+        <result property="parentName" column="parent_name" />
+        <result property="parentId" column="parent_id" />
+        <result property="orderNum" column="order_num" />
+        <result property="url" column="url" />
+        <result property="menuType" column="menu_type" />
+        <result property="target" column="target" />
+        <result property="menuKey" column="menu_key" />
+        <result property="menuLay" column="menu_lay" />
+        <result property="visible" column="visible" />
+        <result property="perms" column="perms" />
+        <result property="icon" column="icon" />
+        <result property="createBy" column="create_by" />
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time" />
+        <result property="updateBy" column="update_by" />
+        <result property="remark" column="remark" />
+    </resultMap>
+
+    <!--SQL-->
+    <sql id="selectMenuVo">
+		select menu_id, menu_name, parent_id,target, order_num, url, menu_type, menu_key,
+		menu_lay, visible, ifnull(perms,'') as perms, icon, create_by,
+		create_time
+		from sys_menu
+	</sql>
+
+    <!--根据用户ID查询权限-->
+    <select id="selectPermsByUserId" resultType="java.lang.String">
+        select distinct m.perms from sys_menu m
+        left join sys_role_menu rm on m.menu_id = rm.menu_id
+        left join sys_user_role ur on rm.role_id = ur.role_id
+        where ur.user_id = #{userId}
+    </select>
+</mapper>

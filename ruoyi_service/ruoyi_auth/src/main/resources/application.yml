@@ -18,7 +18,7 @@ spring:
     config:
       fail-fast: true
       name: ${spring.application.name}
-      profile: ${spring.profiles.active}      #组成配置文件名
+      profile: ${spring.profiles.active}      #组成配置文件名:xxx-dev
       discovery:
         enabled: true
         service-id: ruoyi_config

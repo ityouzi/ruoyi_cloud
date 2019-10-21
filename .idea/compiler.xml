@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -16,6 +17,7 @@
         <module name="ruoyi_dfs" />
         <module name="ruoyi_eureka" />
         <module name="ruoyi_gateway" />
+        <module name="ruoyi_generate" />
         <module name="ruoyi_system" />
         <module name="ruoyi_system_api" />
       </profile>
