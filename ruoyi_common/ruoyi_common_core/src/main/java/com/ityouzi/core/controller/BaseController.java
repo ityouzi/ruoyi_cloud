@@ -3,7 +3,7 @@ package com.ityouzi.core.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ityouzi.constant.Constants;
-import com.ityouzi.core.domain.R;
+import com.ityouzi.core.domain.ResultMsg;
 import com.ityouzi.core.page.PageDomain;
 import com.ityouzi.core.page.TableDataInfo;
 import com.ityouzi.core.page.TableSupport;
@@ -102,13 +102,13 @@ public class BaseController {
     }
 
 
-    protected R result(List<?> list){
+    protected ResultMsg result(List<?> list){
         PageInfo<?> pageInfo = new PageInfo<>(list);
         Map<String, Object> map = new HashMap<>();
         map.put("rows", list);
         map.put("pageNum", pageInfo.getPageNum());
         map.put("total", pageInfo.getTotal());
-        return R.ok(map);
+        return ResultMsg.ok(map);
     }
 
     /**
@@ -117,9 +117,9 @@ public class BaseController {
      * @param rows 影响行数
      * @return 操作结果
      */
-    protected R toAjax(int rows)
+    protected ResultMsg toAjax(int rows)
     {
-        return rows > 0 ? R.ok() : R.error();
+        return rows > 0 ? ResultMsg.ok() : ResultMsg.error();
     }
 
     /**
@@ -128,9 +128,9 @@ public class BaseController {
      * @param result 结果
      * @return 操作结果
      */
-    protected R toAjax(boolean result)
+    protected ResultMsg toAjax(boolean result)
     {
-        return result ? R.ok() : R.error();
+        return result ? ResultMsg.ok() : ResultMsg.error();
     }
 
 

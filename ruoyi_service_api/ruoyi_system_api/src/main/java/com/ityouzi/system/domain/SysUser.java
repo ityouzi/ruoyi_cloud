@@ -90,8 +90,13 @@ public class SysUser extends BaseEntity {
     private Set<String> buttons;
 
 
-
-
+    //是否是管理员ID
+    public boolean isAdmin(){
+        return isAdmin(this.userId);
+    }
+    public static boolean isAdmin(Long userId){
+        return userId != null && 1L == userId;
+    }
 
 
 
