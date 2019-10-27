@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ityouzi.mapper.SysRoleMenuMapper">
+    <resultMap id="SysRoleMenuResult" type="com.ityouzi.system.domain.SysRoleMenu">
+        <result property="roleId"     column="role_id"      />
+        <result property="menuId"     column="menu_id"      />
+    </resultMap>
+
+    <!--通过角色ID删除角色和菜单关联-->
+    <delete id="deleteRoleMenuByRoleId" parameterType="long">
+        delete from sys_role_menu where role_id=#{roleId}
+    </delete>
+
+
+</mapper>

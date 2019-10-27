@@ -118,6 +118,14 @@
         where user_id = #{userId}
     </update>
 
+    <!--批量删除用户信息-->
+    <delete id="deleteUserByIds" parameterType="long">
+        update sys_user set del_flag = '2' where user_id in
+        <foreach collection="array" item="userId" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+
 
     <!--通过用户ID查询用户-->
     <select id="selectUserById" resultMap="SysUserResult">

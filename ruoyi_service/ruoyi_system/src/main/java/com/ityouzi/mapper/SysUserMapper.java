@@ -55,4 +55,9 @@ public interface SysUserMapper {
      * 修改用户信息
      */
     int updateUser(SysUser sysUser);
+
+    /**
+     * 批量删除用户信息
+     */
+    int deleteUserByIds(Long[] userIds);
 }

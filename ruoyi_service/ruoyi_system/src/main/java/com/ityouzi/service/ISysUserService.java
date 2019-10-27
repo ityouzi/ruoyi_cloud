@@ -61,4 +61,19 @@ public interface ISysUserService {
      * 修改用户详细信息
      */
     int updateUserInfo(SysUser user);
+
+    /**
+     * 重置密码
+     */
+    int resetUserPwd(SysUser user);
+
+    /**
+     * 用户状态修改
+     */
+    int changeStatus(SysUser user);
+
+    /**
+     * 批量删除用户信息
+     */
+    int deleteUserByIds(String ids);
 }

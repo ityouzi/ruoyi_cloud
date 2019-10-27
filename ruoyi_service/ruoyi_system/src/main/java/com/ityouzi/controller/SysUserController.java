@@ -139,8 +139,39 @@ public class SysUserController extends BaseController {
         return toAjax(sysUserService.updateUser(user));
     }
 
+    /**
+     * 2019/10/25-17:56
+     * 重置密码
+     */
+    @HasPermissions("system:user:resetPwd")
+    @PostMapping("/resetPwd")
+    public ResultMsg resetPwd(@RequestBody SysUser user){
+        user.setSalt(RandomUtil.randomStr(6));
+        user.setPassword(PasswordUtil.encryptPassword(user.getLoginName(),
+                user.getPassword(),
+                user.getSalt()));
+        return toAjax(sysUserService.resetUserPwd(user));
+    }
 
+    /**
+     * 2019/10/27-13:48
+     * 修改状态
+     */
+    @HasPermissions("system:user:edit")
+    @PostMapping("status")
+    public ResultMsg status(@RequestBody SysUser sysUser){
+        return toAjax(sysUserService.changeStatus(sysUser));
+    }
 
+    /**
+     * 2019/10/27-13:57
+     * 删除用户
+     */
+    @HasPermissions("system:user:remove")
+    @PostMapping("remove")
+    public ResultMsg remove(String ids){
+        return toAjax(sysUserService.deleteUserByIds(ids));
+    }
 
 
 }

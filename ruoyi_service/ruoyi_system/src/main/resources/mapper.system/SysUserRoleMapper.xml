@@ -21,4 +21,9 @@
     <delete id="deleteUserRoleByUserId" parameterType="long">
         delete from sys_user_role where user_id = #{userId}
     </delete>
+
+    <!--通过角色ID查询角色使用数量-->
+    <select id="countUserRoleByRoleId" resultType="java.lang.Integer">
+        select count(1) from sys_user_role where role_id=#{roleId}
+    </select>
 </mapper>

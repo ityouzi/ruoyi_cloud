@@ -18,4 +18,6 @@ public interface SysUserRoleMapper {
      * 通过用户ID删除用户和岗位关联
      */
     int deleteUserRoleByUserId(Long userId);
+
+    int countUserRoleByRoleId(Long roleId);
 }

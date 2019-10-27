@@ -3,6 +3,8 @@ package com.ityouzi.service.impl;
 
 import com.ityouzi.annotation.DataScope;
 import com.ityouzi.constant.UserConstants;
+import com.ityouzi.core.text.Convert;
+import com.ityouzi.exception.BusinessException;
 import com.ityouzi.mapper.SysUserMapper;
 import com.ityouzi.mapper.SysUserPostMapper;
 import com.ityouzi.mapper.SysUserRoleMapper;
@@ -157,6 +159,41 @@ public class SysUserServiceImpl implements ISysUserService {
     @Override
     public int updateUserInfo(SysUser user) {
         return sysUserMapper.updateUser(user);
+    }
+
+    /**
+     * 重置密码
+     */
+    @Override
+    public int resetUserPwd(SysUser user) {
+        return updateUserInfo(user);
+    }
+    
+    /**
+     * 2019/10/27-13:52
+     * 用户状态修改
+     */
+    @Override
+    public int changeStatus(SysUser user) {
+        if (user.isAdmin(user.getUserId())){
+            throw new BusinessException("不允许修改超级管理员用户");
+        }
+        return sysUserMapper.updateUser(user);
+    }
+
+    /**
+     * 2019/10/27-14:21
+     * 批量删除用户信息
+     */
+    @Override
+    public int deleteUserByIds(String ids) {
+        Long[] userIds = Convert.toLongArray(ids);
+        for (Long userId:userIds){
+            if (SysUser.isAdmin(userId)){
+                throw new BusinessException("不允许删除超级管理员用户");
+            }
+        }
+        return sysUserMapper.deleteUserByIds(userIds);
     }
 
     /**
