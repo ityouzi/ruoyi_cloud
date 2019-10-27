@@ -8,12 +8,14 @@ import com.ityouzi.system.domain.SysMenu;
 import com.ityouzi.system.domain.SysUser;
 import com.ityouzi.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 /**
  * 菜单 业务层处理
  */
+@Service
 public class SysMenuServiceImpl implements ISysMenuService {
 
     //权限字符串
