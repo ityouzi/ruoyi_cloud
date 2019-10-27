@@ -31,6 +31,69 @@
 		create_time
 		from sys_menu
 	</sql>
+    <insert id="insertMenu">
+        insert into sys_menu(
+            <if test="menuId != null and menuId != 0">menu_id,</if>
+            <if test="parentId != null and parentId != 0">parent_id,</if>
+            <if test="menuName != null and menuName != ''">menu_name,</if>
+            <if test="orderNum != null and orderNum != ''">order_num,</if>
+            <if test="url != null and url != ''">url,</if>
+            <if test="menuType != null and menuType != ''">menu_type,</if>
+            <if test="target != null and target != ''">target,</if>
+            <if test="menuKey != null and menuKey != ''">menu_key,</if>
+            <if test="menuLay != null and menuLay != ''">menu_lay ,</if>
+            <if test="visible != null">visible,</if>
+            <if test="perms !=null and perms != ''">perms,</if>
+            <if test="icon != null and icon != ''">icon,</if>
+            <if test="remark != null and remark != ''">remark,</if>
+            <if test="createBy != null and createBy != ''">create_by,</if>
+            create_time
+        )values (
+            <if test="menuId != null and menuId != 0">#{menuId},</if>
+            <if test="parentId != null and parentId != 0">#{parentId},</if>
+            <if test="menuName != null and menuName != ''">#{menuName},</if>
+            <if test="orderNum != null and orderNum != ''">#{orderNum},</if>
+            <if test="url != null and url != ''">#{url},</if>
+            <if test="menuType != null and menuType != ''">#{menuType},</if>
+            <if test="target != null and target != ''">#{target},</if>
+            <if test="menuKey != null and menuKey != ''">#{menuKey},</if>
+            <if test="menuLay != null and menuLay != ''">#{menuLay},</if>
+            <if test="visible != null">#{visible},</if>
+            <if test="perms !=null and perms != ''">#{perms},</if>
+            <if test="icon != null and icon != ''">#{icon},</if>
+            <if test="remark != null and remark != ''">#{remark},</if>
+            <if test="createBy != null and createBy != ''">#{createBy},</if>
+            sysdate()
+        )
+
+    </insert>
+
+    <!--修改保存菜单信息-->
+    <update id="updateMenu" parameterType="com.ityouzi.system.domain.SysMenu">
+      update sys_menu
+      <set>
+          <if test="menuName != null and menuName != ''">menu_name = #{menuName},</if>
+          <if test="parentId != null and parentId != 0">parent_id = #{parentId},</if>
+          <if test="orderNum != null and orderNum != ''">order_num = #{orderNum},</if>
+          <if test="url != null and url != ''">url = #{url},</if>
+          <if test="menuType != null and menuType != ''">menu_type = #{menuType},</if>
+          <if test="target != null and target != ''">target = #{target},</if>
+          <if test="menuKey != null and menuKey != ''">menu_key = #{menuKey},</if>
+          <if test="menuLay != null">menu_lay = #{menuLay},</if>
+          <if test="visible != null">visible = #{visible},</if>
+          <if test="perms !=null">perms = #{perms},</if>
+          <if test="icon !=null and icon != ''">icon = #{icon},</if>
+          <if test="remark != null and remark != ''">remark = #{remark},</if>
+          <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+          update_time = sysdate()
+      </set>
+      where menu_id = #{menuId}
+    </update>
+
+    <!--删除菜单管理信息-->
+    <delete id="deleteMenuById" parameterType="long">
+        delete from sys_menu where menu_id = #{menuId} or parent_id = #{menuId}
+    </delete>
 
     <!--根据用户ID查询权限-->
     <select id="selectPermsByUserId" resultType="java.lang.String">
@@ -38,5 +101,65 @@
         left join sys_role_menu rm on m.menu_id = rm.menu_id
         left join sys_user_role ur on rm.role_id = ur.role_id
         where ur.user_id = #{userId}
+    </select>
+
+    <!--根据菜单ID查询信息-->
+    <select id="selectMenuById" parameterType="long" resultMap="SysMenuResult">
+        select t.menu_id, t.parent_id, t.menu_name, t.order_num,t.target,
+		t.url, t.menu_type, t.visible, t.perms, t.icon, t.remark,
+		(select menu_name from sys_menu where menu_id = t.parent_id) parent_name
+		from sys_menu t
+		where t.menu_id = #{menuId}
+    </select>
+
+    <!--查询系统正常显示菜单（不含按钮）-->
+    <select id="selectMenuNormalAll" resultMap="SysMenuResult">
+        select distinct
+        m.menu_id, m.parent_id, m.menu_name, m.menu_key,m.menu_lay,m.url,m.target,m.visible,
+		m.perms, m.menu_type, m.icon, m.order_num, m.create_time
+		from sys_menu m
+		where m.menu_type in ('M', 'C') and
+		length(m.menu_key)>0
+		order by m.order_num
+    </select>
+
+    <!--根据用户ID查询权限-->
+    <select id="selectMenusByUserId" parameterType="long" resultMap="SysMenuResult">
+        select distinct m.menu_id, m.parent_id, m.menu_name, m.url,
+		m.perms, m.menu_type,m.menu_key,m.menu_lay,m.target, m.icon, m.order_num,m.visible,
+		m.create_time
+		from sys_menu m
+		left join sys_role_menu rm on m.menu_id = rm.menu_id
+		left join sys_user_role on rm.role_id = ur.role_id
+		left join sys_role ro on ur.role_id = ro.role_id
+		where ur.user_id = #{userId}
+		and m.menu_type in ('M','C')
+		and ro.status = 0 and length(m.menu_key)>0
+		order by m.order_num
+    </select>
+
+    <!--根据角色ID查询菜单-->
+    <select id="selectMenuIdsByRoleId" resultMap="SysMenuResult">
+        select distinct m.menu_id, m.parent_id
+        from sys_menu m
+        left join sys_role_menu rm on m.menu_id = rm.menu_id
+        where rm.role_id = #{roleId}
+    </select>
+
+    <!--查询系统菜单列表-->
+    <select id="selectMenuList" resultMap="SysMenuResult">
+        <include refid="selectMenuVo"/>
+        <where>
+            <if test="menuKey != null and menuKey != ''">
+                AND menu_key=#{menuKey}
+            </if>
+            <if test="menuName != null and menuName != ''">
+                AND menu_name like concat('%', #{menuName}, '%')
+            </if>
+            <if test="visible != null and visible != ''">
+                AND visible = #{visible}
+            </if>
+        </where>
+        order by order_num
     </select>
 </mapper>
