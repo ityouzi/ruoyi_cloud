@@ -81,6 +81,13 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
+        <!--日志模块-->
+        <dependency>
+            <groupId>com.tiyouzi</groupId>
+            <artifactId>ruoyi_common_log</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <!--redis 模块-->
         <dependency>
             <groupId>com.tiyouzi</groupId>
