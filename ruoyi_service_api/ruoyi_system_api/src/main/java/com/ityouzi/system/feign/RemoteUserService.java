@@ -1,7 +1,7 @@
 package com.ityouzi.system.feign;
 
 import com.ityouzi.constant.ServiceNameConstants;
-import com.ityouzi.core.domain.R;
+import com.ityouzi.core.domain.ResultMsg;
 import com.ityouzi.system.domain.SysUser;
 import com.ityouzi.system.feign.factory.RemoteUserFallbackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -25,5 +25,5 @@ public interface RemoteUserService {
 
     //更新用户登录记录
     @PostMapping("user/update/login")
-    public R updateUserLoginRecord(@RequestBody SysUser user);
+    public ResultMsg updateUserLoginRecord(@RequestBody SysUser user);
 }

@@ -1,6 +1,6 @@
 package com.ityouzi.system.feign.factory;
 
-import com.ityouzi.core.domain.R;
+import com.ityouzi.core.domain.ResultMsg;
 import com.ityouzi.system.domain.SysUser;
 import com.ityouzi.system.feign.RemoteUserService;
 import feign.hystrix.FallbackFactory;
@@ -19,7 +19,7 @@ public class RemoteUserFallbackFactory implements FallbackFactory<RemoteUserServ
                 return null;
             }
 
-            public R updateUserLoginRecord(SysUser sysUser){
+            public ResultMsg updateUserLoginRecord(SysUser sysUser){
                 return null;
             }
         };
