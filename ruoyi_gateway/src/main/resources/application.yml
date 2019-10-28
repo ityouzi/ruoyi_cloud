@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: ruoyi_gateway
+    name: ruoyi-gateway
   devtools:
     restart:
       enabled: true
@@ -16,15 +16,15 @@ spring:
       profile: ${spring.profiles.active}
       discovery:
         enabled: true
-        service-id: ruoyi_config
+        service-id: ruoyi-config
     gateway:
       discovery:
         locator:
           enabled: true
       routes:
         #认证中心
-        - id: ruoyi_auth
-          uri: lb://ruoyi_auth
+        - id: ruoyi-auth
+          uri: lb://ruoyi-auth
           predicates:
             - Path=/auth/**
           filters:
@@ -33,6 +33,26 @@ spring:
             - ImgCodeFilter
             - StripPrefix=1
           #代码生成
+        #system 模块
+        - id: ruoyi-system
+          uri: lb://ruoyi-system
+          predicates:
+            - Path=/system/**
+          filters:
+            # 限流配置
+            - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@remoteAddrKeyResolver}'
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+              # 降级配置
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: 'forward:/fallback'
+
+
 
 eureka:
   client:

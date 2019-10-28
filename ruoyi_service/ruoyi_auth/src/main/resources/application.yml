@@ -8,7 +8,7 @@ logging:    #日志配置
 
 spring:
   application:
-    name: ruoyi_auth
+    name: ruoyi-auth
   messages:                   #资源信息
     basename: i18n/messages   #国际化资源文件路径
   jackson:
@@ -21,7 +21,7 @@ spring:
       profile: ${spring.profiles.active}      #组成配置文件名:xxx-dev
       discovery:
         enabled: true
-        service-id: ruoyi_config
+        service-id: ruoyi-config
   profiles:
     active: dev
   main:

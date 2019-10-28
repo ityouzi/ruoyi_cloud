@@ -2,7 +2,7 @@ server:
   port: 8888
 spring:
   application:
-    name: ruoyi_config
+    name: ruoyi-config
   profiles:
     active: native
   cloud:  #本地配置中心
